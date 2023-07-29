@@ -3,22 +3,22 @@ CREATING A DATABASE:
 [
   {
     "_id": ObjectId("c1"),
-    "name": "John Doe",
+    "name": "A",
     "age": 25
   },
   {
     "_id": ObjectId("c2"),
-    "name": "Jane Smith",
+    "name": "B",
     "age": 22
   },
   {
     "_id": ObjectId("c3"),
-    "name": "Michael Johnson",
+    "name": "C",
     "age": 27
   },
   {
     "_id": ObjectId("c4"),
-    "name": "Emily Williams",
+    "name": "D",
     "age": 24
   }
 ]
