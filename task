@@ -1,3 +1,167 @@
+CREATING A DATABASE:
+1.users collection:
+[
+  {
+    "_id": ObjectId("c1"),
+    "name": "John Doe",
+    "age": 25
+  },
+  {
+    "_id": ObjectId("c2"),
+    "name": "Jane Smith",
+    "age": 22
+  },
+  {
+    "_id": ObjectId("c3"),
+    "name": "Michael Johnson",
+    "age": 27
+  },
+  {
+    "_id": ObjectId("c4"),
+    "name": "Emily Williams",
+    "age": 24
+  }
+]
+--------------------------------------------------------------------------------
+2. codekata collection:
+[
+  {
+    "_id": ObjectId("cc1"),
+    "userId": ObjectId("c1"),
+    "problemCount": 10
+  },
+  {
+    "_id": ObjectId("cc2"),
+    "userId": ObjectId("c2"),
+    "problemCount": 15
+  },
+  {
+    "_id": ObjectId("cc3"),
+    "userId": ObjectId("c3"),
+    "problemCount": 8
+  },
+  {
+    "_id": ObjectId("cc4"),
+    "userId": ObjectId("c4"),
+    "problemCount": 12
+  }
+]
+--------------------------------------------------------------------------------
+3.attendance collection:
+[
+  {
+    "_id": ObjectId("a1"),
+    "userId": ObjectId("c1"),
+    "date": ISODate("2023-07-15"),
+    "isAbsent": false
+  },
+  {
+    "_id": ObjectId("a2"),
+    "userId": ObjectId("c2"),
+    "date": ISODate("2023-07-15"),
+    "isAbsent": true
+  },
+  {
+    "_id": ObjectId("a3"),
+    "userId": ObjectId("c3"),
+    "date": ISODate("2023-07-16"),
+    "isAbsent": true
+  },
+  {
+    "_id": ObjectId("a4"),
+    "userId": ObjectId("c4"),
+    "date": ISODate("2023-07-17"),
+    "isAbsent": false
+  }
+]
+--------------------------------------------------------------------------------
+4.topics collection:
+[
+  {
+    "_id": ObjectId("t1"),
+    "name": "Introduction to Programming"
+  },
+  {
+    "_id": ObjectId("t2"),
+    "name": "Data Structures"
+  },
+  {
+    "_id": ObjectId("t3"),
+    "name": "Algorithms"
+  },
+  {
+    "_id": ObjectId("t4"),
+    "name": "Web Development"
+  }
+]
+--------------------------------------------------------------------------------
+5.tasks collection:
+[
+  {
+    "_id": ObjectId("tk1"),
+    "topicId": ObjectId("t1"),
+    "date": ISODate("2023-07-25"),
+    "isSubmitted": true
+  },
+  {
+    "_id": ObjectId("tk2"),
+    "topicId": ObjectId("t2"),
+    "date": ISODate("2023-07-28"),
+    "isSubmitted": false
+  },
+  {
+    "_id": ObjectId("tk3"),
+    "topicId": ObjectId("t3"),
+    "date": ISODate("2023-07-30"),
+    "isSubmitted": true
+  },
+  {
+    "_id": ObjectId("tk"),
+    "topicId": ObjectId("t4"),
+    "date": ISODate("2023-07-29"),
+    "isSubmitted": false
+  }
+]
+
+--------------------------------------------------------------------------------
+6.company_drives collection:
+[
+  {
+    "_id": ObjectId("C_D1"),
+    "date": ISODate("2023-08-10")
+  },
+  {
+    "_id": ObjectId("C_D2"),
+    "date": ISODate("2023-08-25")
+  },
+  {
+    "_id": ObjectId("C_D3"),
+    "date": ISODate("2023-09-05")
+  }
+]
+--------------------------------------------------------------------------------
+7.mentors collection:
+[
+  {
+    "_id": ObjectId("M1"),
+    "name": "X",
+    "menteeCount": 20
+  },
+  {
+    "_id": ObjectId("M2"),
+    "name": "Y",
+    "menteeCount": 15
+  },
+  {
+    "_id": ObjectId("M3"),
+    "name": "Z",
+    "menteeCount": 10
+  }
+]
+
+--------------------------------------------------------------------------------
+
+TASK:
 1.Find all the topics and tasks which are taught in the month of October:
 db.topics.aggregate([
   {
@@ -58,7 +222,7 @@ db.codekata.aggregate([
 db.mentors.find({
   menteeCount: { $gt: 15 },
 });
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 6.Find the number of users who are absent and task is not submitted between 15-oct-2020 and 31-oct-2020:
 db.attendance.aggregate([
   {
@@ -84,3 +248,4 @@ db.attendance.aggregate([
     },
   },
 ]);
+--------------------------------------------------------------------------------
