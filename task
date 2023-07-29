@@ -1,0 +1,86 @@
+1.Find all the topics and tasks which are taught in the month of October:
+db.topics.aggregate([
+  {
+    $lookup: {
+      from: "tasks",
+      localField: "_id",
+      foreignField: "topicId",
+      as: "tasks",
+    },
+  },
+  {
+    $match: {
+      "tasks.date": {
+        $gte: ISODate("2023-10-01"),
+        $lte: ISODate("2023-10-31"),
+      },
+    },
+  },
+]);
+------------------------------------------------------------------------------------
+2.Find all the company drives which appeared between 15-oct-2020 and 31-oct-2020:
+db.company_drives.find({
+  date: {
+    $gte: ISODate("2023-10-15"),
+    $lte: ISODate("2023-10-31"),
+  },
+});
+------------------------------------------------------------------------------------
+3.Find all the company drives and students who appeared for the placement:
+db.company_drives.aggregate([
+  {
+    $lookup: {
+      from: "users",
+      localField: "_id",
+      foreignField: "userId",
+      as: "students",
+    },
+  },
+]);
+------------------------------------------------------------------------------------
+4.Find the number of problems solved by the user in codekata:
+const userId = ObjectId("<user_id_here>");
+db.codekata.aggregate([
+  {
+    $match: {
+      userId: userId,
+    },
+  },
+  {
+    $group: {
+      _id: "$userId",
+      totalProblemsSolved: { $sum: "$problemCount" },
+    },
+  },
+]);
+------------------------------------------------------------------------------------
+5.Find all the mentors with mentee's count more than 15:
+db.mentors.find({
+  menteeCount: { $gt: 15 },
+});
+--------------------------------------------------------------------------------
+6.Find the number of users who are absent and task is not submitted between 15-oct-2020 and 31-oct-2020:
+db.attendance.aggregate([
+  {
+    $match: {
+      date: {
+        $gte: ISODate("2023-10-15"),
+        $lte: ISODate("2023-10-31"),
+      },
+      isAbsent: true,
+    },
+  },
+  {
+    $lookup: {
+      from: "tasks",
+      localField: "userId",
+      foreignField: "userId",
+      as: "userTasks",
+    },
+  },
+  {
+    $match: {
+      "userTasks.isSubmitted": { $ne: true },
+    },
+  },
+]);
